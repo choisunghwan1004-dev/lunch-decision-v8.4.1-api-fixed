@@ -1,6 +1,6 @@
 {
   "name": "lunch-decision-v8-4-integrated",
-  "version": "8.4.1",
+  "version": "8.5.1",
   "private": true,
   "main": "server.js",
   "scripts": {
@@ -15,7 +15,11 @@
     "check": "node --check server.js && node --check routes/api.js && node --check scripts/migrate.js && node --check scripts/backup.js",
     "seed:base": "node scripts/seed-demo.js",
     "test:api": "node scripts/test-api.js",
-    "doctor": "node scripts/doctor.js"
+    "doctor": "node scripts/doctor.js",
+    "news:setup": "node scripts/news-setup.js",
+    "news:run": "python -m uvicorn news_service.app:app --host 127.0.0.1 --port 8001",
+    "news:test": "python -m pytest -q news_service/tests",
+    "news:test:real": "python news_service/tests/real_integration.py --run-live"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
