@@ -5,6 +5,7 @@ app.disable('x-powered-by');
 app.use(express.json({limit:'300kb'}));app.use(express.urlencoded({extended:false}));
 app.use(session({secret:process.env.SESSION_SECRET||'LOCAL_ONLY_CHANGE_ME',resave:false,saveUninitialized:false,cookie:{httpOnly:true,sameSite:'lax',maxAge:4*60*60*1000}}));
 app.use(express.static(path.join(__dirname,'public')));
+app.use('/api/news',require('./routes/news-proxy'));
 app.use('/api',api);
 app.get('/admin',(req,res)=>res.sendFile(path.join(__dirname,'public/admin.html')));
 app.get('/health',async(req,res)=>{try{await require('./db').query('SELECT 1');res.json({ok:true,version:'V8.4.1'})}catch(e){res.status(503).json({ok:false,message:e.message})}});

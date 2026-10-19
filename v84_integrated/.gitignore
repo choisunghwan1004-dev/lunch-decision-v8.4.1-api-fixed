@@ -3,3 +3,9 @@ node_modules/
 backups/*
 !backups/.gitkeep
 diagnostics/*.json
+
+news_service/__pycache__/
+news_service/tests/__pycache__/
+*.pyc
+.venv/
+news_service/diagnostics/*.json
