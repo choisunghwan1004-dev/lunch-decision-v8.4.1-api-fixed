@@ -13,7 +13,7 @@ body{background:linear-gradient(135deg,#eef2ff,#f8fafc);color:#172033}.adminwrap
 <section id="app" class="admin-app">
 <header class="admin-head"><div class="head-actions"><button class="home" onclick="location.href='/'">🏠 사용자 화면</button><button class="logout" onclick="logout()">로그아웃</button></div><h1>🧭 V8.4 관리자 센터</h1><p>모든 지역 입력을 직접 타이핑하지 않고 단계별 Select로 관리합니다.</p></header>
 <div id="stats" class="stats"></div>
-<div class="tabs"><button onclick="show('location')">📍 지역 관리</button><button onclick="show('restaurant')">🍚 음식점 등록</button><button onclick="show('sync')">🌐 실제 데이터 동기화</button><button onclick="show('places')">🗺 여행 장소</button></div>
+<div class="tabs"><button onclick="show('location')">📍 지역 관리</button><button onclick="show('restaurant')">🍚 음식점 등록</button><button onclick="show('sync')">🌐 실제 데이터 동기화</button><button onclick="show('places')">🗺 여행 장소</button><button onclick="show('news')">📰 AI 지역 뉴스</button></div>
 
 <section id="location" class="panel active">
 <div class="card success"><h2>📍 V8 행정구역 선택</h2><p class="hint">앞 단계가 선택되면 다음 단계가 자동으로 열립니다.</p>
@@ -31,7 +31,7 @@ body{background:linear-gradient(135deg,#eef2ff,#f8fafc);color:#172033}.adminwrap
 <section id="sync" class="panel"><div class="card sync-box"><h2>🌐 Google Places 실제 데이터</h2><p>V8.4의 자동 동기화는 지역 오등록 방지를 위해 일시 중지되어 있습니다. 먼저 상권 연결과 장소 등록을 검증하세요.</p><div class="sync-grid"><label>도시<select id="syncCity"></select></label><label>국가코드<select id="syncCountry"><option>KR</option><option>JP</option></select></label><div class="hint">필요: GOOGLE_MAPS_API_KEY</div><button class="primary" onclick="syncPlaces()">실제 데이터 동기화</button></div><div id="syncMsg" class="status"></div></div></section>
 
 <section id="places" class="panel"><div class="card"><h2>🗺 관광지·카페·숙박 등록</h2><p class="hint">국가 → 시·도 → 시·군·구 → 읍·면·동 → 상권을 선택한 다음 등록합니다.</p><div class="formgrid"><select id="pCountry"></select><select id="pProvince" disabled></select><select id="pDistrict" disabled></select><select id="pTown" disabled></select><select id="pRi" disabled></select><select id="pArea" disabled></select><select id="pType"><option value="attraction">관광지</option><option value="cafe">카페</option><option value="lodging">숙박</option><option value="restaurant">음식점 (저녁)</option></select><input id="pName" placeholder="장소명"><input id="pAddress" placeholder="주소"><input id="pMin" type="number" placeholder="최저가격"><input id="pMax" type="number" placeholder="최고가격"><input id="pLat" type="number" step="any" placeholder="위도 (선택)"><input id="pLng" type="number" step="any" placeholder="경도 (선택)"><button class="primary" onclick="addPlace()">장소 등록</button></div><div id="placeMsg" class="status"></div></div><div class="card"><h3>여행 장소 목록</h3><div id="placeTable" class="tablewrap"></div></div></section>
-</section></main>
+</section><section id="news" class="panel"><div class="card"><h2>📰 AI 지역 뉴스 제작 센터 — V8.5.1</h2><p>검증된 Fact Sheet 기반 기사 초안 생성. 최종 승인·일반 공개는 다음 버전에서 연결합니다.</p><p class="hint">뉴스 모듈은 FastAPI 별도 실행: 127.0.0.1:8000 / 관리자 비밀번호 재확인</p><a href="http://127.0.0.1:8000/" target="_blank" rel="noopener" class="primary">뉴스 제작 센터 열기</a></div></section></section></main>
 <script>
 const $=id=>document.getElementById(id);
 const api=async(url,opt={})=>{const r=await fetch(url,opt);const d=await r.json();if(!r.ok)throw Error(d.message+(d.detail?' | '+d.detail:''));return d};
